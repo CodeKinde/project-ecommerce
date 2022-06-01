@@ -35,7 +35,7 @@ Amkassougou|mali
             <div class="row product-micro-row">
                 <div class="col col-xs-5">
                 <div class="product-image">
-                    <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                    <div class="image"> <a href="{{ url('product/details/'.$product->id) }}">
                  <img  src="{{ asset($product->product_thambnail) }}" style="width:76px; height:70px" alt=""> </a> </div>
                     <!-- /.image -->
                 </div>
@@ -44,7 +44,7 @@ Amkassougou|mali
                 <!-- /.col -->
                 <div class="col col-xs-7">
                 <div class="product-info">
-                    <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                    <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
                     @if (session()->get('language') == 'english')
                     {!! Str::limit($product->product_name_en,30) !!}
                     @else
@@ -85,18 +85,11 @@ Amkassougou|mali
 </div>
 <!-- /.sidebar-widget -->
           <!-- ============================================== SPECIAL OFFER : END ============================================== -->
-          <!-- ============================================== PRODUCT TAGS ============================================== -->
-          <div class="sidebar-widget product-tag wow fadeInUp">
-            <h3 class="section-title">Product tags</h3>
-            <div class="sidebar-widget-body outer-top-xs">
-              <div class="tag-list"> <a class="item" title="Phone" href="category.html">Phone</a> <a class="item active" title="Vest" href="category.html">Vest</a> <a class="item" title="Smartphone" href="category.html">Smartphone</a> <a class="item" title="Furniture" href="category.html">Furniture</a> <a class="item" title="T-shirt" href="category.html">T-shirt</a> <a class="item" title="Sweatpants" href="category.html">Sweatpants</a> <a class="item" title="Sneaker" href="category.html">Sneaker</a> <a class="item" title="Toys" href="category.html">Toys</a> <a class="item" title="Rose" href="category.html">Rose</a> </div>
-              <!-- /.tag-list -->
-            </div>
-            <!-- /.sidebar-widget-body -->
-          </div>
-          <!-- /.sidebar-widget -->
-          <!-- ============================================== PRODUCT TAGS : END ============================================== -->
-          <!-- ============================================== SPECIAL DEALS ============================================== -->
+          <!-- ========================= PRODUCT TAGS====================== -->
+          @include('frontend.common.product_tags')
+
+          <!--================= PRODUCT TAGS : END========================= -->
+ <!--===================== SPECIAL DEALS======================= -->
 
     <div class="sidebar-widget outer-bottom-small wow fadeInUp">
     <h3 class="section-title">Special Deals</h3>
@@ -112,7 +105,7 @@ Amkassougou|mali
                 <div class="row product-micro-row">
                     <div class="col col-xs-5">
                     <div class="product-image">
-                        <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                        <div class="image"> <a href="{{ url('product/details/'.$product->id) }}">
                 <img  src="{{ asset($product->product_thambnail) }}" style="width:76px; height:70px" alt=""> </a> </div>
                         <!-- /.image -->
 
@@ -122,7 +115,7 @@ Amkassougou|mali
                     <!-- /.col -->
                     <div class="col col-xs-7">
                     <div class="product-info">
-                        <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                        <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
                         @if (session()->get('language') == 'english')
                         {!! Str::limit($product->product_name_en,30) !!}
                         @else
@@ -319,7 +312,7 @@ Amkassougou|mali
         <div class="product">
             <div class="product-image">
             <div class="image">
-<a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+<a href="{{ url('product/details/'.$product->id) }}">
             <img  src="{{ asset($product->product_thambnail) }}" style="width:166px; height:152px" alt="">
         </a> </div>
             <!-- /.image -->
@@ -336,7 +329,7 @@ Amkassougou|mali
             <!-- /.product-image -->
 
             <div class="product-info text-left">
-            <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+            <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
             @if (session()->get('language') == 'english')
             {!! Str::limit($product->product_name_en,30) !!}
             @else
@@ -404,7 +397,7 @@ Amkassougou|mali
         <div class="product">
             <div class="product-image">
             <div class="image">
-         <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+         <a href="{{ url('product/details/'.$product->id) }}">
          <img  src="{{ asset($product->product_thambnail) }}" style="width:166px; height:152px" alt=""></a> </div>
             <!-- /.image -->
 
@@ -421,7 +414,7 @@ Amkassougou|mali
             <!-- /.product-image -->
 
             <div class="product-info text-left">
-     <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+     <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
                 @if (session()->get('language') == 'english')
                 {!! Str::limit($product->product_name_en,30) !!}
                 @else
@@ -513,7 +506,7 @@ Amkassougou|mali
                 <div class="products">
                   <div class="product">
                     <div class="product-image">
-                    <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                    <div class="image"> <a href="{{ url('product/details/'.$product->id) }}">
                         <img  src="{{ asset($product->product_thambnail) }}" style="width:166px; height:152px" alt=""></a> </div>
                       <!-- /.image -->
                       @if($product->discount_price == null)
@@ -529,7 +522,7 @@ Amkassougou|mali
                     <!-- /.product-image -->
 
                     <div class="product-info text-left">
-                <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
                         <img src="{{ asset($product->product_thambanail) }}" alt="">
                         @if (session()->get('language') == 'english')
                         {!! Str::limit($product->product_name_en,30) !!}
@@ -614,7 +607,7 @@ Amkassougou|mali
                 <div class="products">
                   <div class="product">
                     <div class="product-image">
-                      <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                      <div class="image"> <a href="{{ url('product/details/'.$product->id) }}">
                         <img  src="{{ asset($product->product_thambnail) }}" style="width:166px; height:152px" alt=""></a> </div>
                       <!-- /.image -->
                       @if($product->discount_price == null)
@@ -630,7 +623,7 @@ Amkassougou|mali
                     <!-- /.product-image -->
 
                     <div class="product-info text-left">
-                      <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                      <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
                         <img src="{{ asset($product->product_thambanail) }}" alt="">
                         @if (session()->get('language') == 'english')
                         {!! Str::limit($product->product_name_en,30) !!}
@@ -686,7 +679,7 @@ Amkassougou|mali
                 <div class="products">
                   <div class="product">
                     <div class="product-image">
-                      <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                      <div class="image"> <a href="{{ url('product/details/'.$product->id) }}">
                         <img  src="{{ asset($product->product_thambnail) }}" style="width:166px; height:152px" alt=""></a> </div>
                       <!-- /.image -->
                       @if($product->discount_price == null)
@@ -702,7 +695,7 @@ Amkassougou|mali
                     <!-- /.product-image -->
 
                     <div class="product-info text-left">
-                      <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                      <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
                         <img src="{{ asset($product->product_thambanail) }}" alt="">
                         @if (session()->get('language') == 'english')
                         {!! Str::limit($product->product_name_en,30) !!}
@@ -760,7 +753,7 @@ Amkassougou|mali
                 <div class="products">
                   <div class="product">
                     <div class="product-image">
-                      <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                      <div class="image"> <a href="{{ url('product/details/'.$product->id) }}">
                         <img  src="{{ asset($product->product_thambnail) }}" style="width:166px; height:152px" alt=""></a> </div>
                       <!-- /.image -->
                       @if($product->discount_price == null)
@@ -776,7 +769,7 @@ Amkassougou|mali
                     <!-- /.product-image -->
 
                     <div class="product-info text-left">
-                      <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+                      <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
                         <img src="{{ asset($product->product_thambanail) }}" alt="">
                         @if (session()->get('language') == 'english')
                         {!! Str::limit($product->product_name_en,30) !!}

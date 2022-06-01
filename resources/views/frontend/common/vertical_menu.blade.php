@@ -22,7 +22,7 @@
                 @foreach ($subcategories as $subcategory)
                 <div class="col-sm-12 col-md-3">
                     <ul class="links list-unstyled">
-                      <li><a href="#">
+            <li><a href="{{ url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en) }}">
                         <h2 class="title">
                        @if (session()->get('language') == 'english')
                         {{ $subcategory->subcategory_name_en }}
@@ -35,7 +35,7 @@
                 @endphp
                     @foreach ($subsubcategories as $subsubcategory)
                     <ul class="links list-unstyled">
-                        <li><a href="#">
+                        <li><a href="{{ url('product/subsubcategory/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_fr) }}">
                          @if (session()->get('language') == 'english')
                           {{ $subsubcategory->subsubcategory_name_en }}
                           @else

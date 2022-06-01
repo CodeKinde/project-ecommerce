@@ -206,5 +206,16 @@ Route::post('user/password/update',[IndexController::class,'UserPasswordUpdate']
 Route::get('language/french',[LanguageController::class,'French'])->name('language.french');
 Route::get('language/english',[LanguageController::class,'English'])->name('language.english');
 
-Route::get('product/details/{id}/{name}',[IndexController::class,'ProductDetails']);
+//frontend product details
+Route::get('product/details/{id}',[IndexController::class,'ProductDetails']);
+
+//frontend product tags
+Route::get('product/tags/{tag}',[IndexController::class,'TagWiseProduct']);
+
+//frontend product subcategory
+Route::get('product/subcategory/{subcateg_id}/{slug}',[IndexController::class,'SubCategoryWiseProduct']);
+
+//frontend product sub subcategory
+Route::get('product/subsubcategory/{subsubcateg_id}/{slug}',[IndexController::class,'SubSubCategoryWiseProduct']);
+
 

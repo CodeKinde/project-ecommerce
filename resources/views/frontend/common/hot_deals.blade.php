@@ -42,7 +42,7 @@
           <!-- /.hot-deal-wrapper -->
 
           <div class="product-info text-left m-t-20">
-            <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name_fr) }}">
+            <h3 class="name"><a href="{{ url('product/details/'.$product->id) }}">
             @if (session()->get('language') == 'english')
             {!! Str::limit($product->product_name_en,30) !!}
             @else

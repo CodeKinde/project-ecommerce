@@ -161,7 +161,7 @@
                      $categories = App\Models\Category::orderBy('id','asc')->get();
                   @endphp
                  @foreach ($categories as $category)
-                  <li class="dropdown yamm mega-menu"><a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                  <li class="dropdown yamm mega-menu"><a href="" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
                     @if(session()->get('language') == 'english')
                     {{ $category->category_name_en }}
                     @else {{$category->category_name_fr  }} @endif </a>
@@ -177,17 +177,20 @@
                     @foreach ($subcategories as $subcategory)
 
                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                    <h2 class="title">
-                    @if(session()->get('language') == 'english')
-                    {{ $subcategory->subcategory_name_en }}
-                    @else {{$subcategory->subcategory_name_fr  }} @endif
-                    </h2>
+                        <a href="{{ url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug_fr) }}">
+                      <h2 class="title">
+                        @if(session()->get('language') == 'english')
+                        {{ $subcategory->subcategory_name_en }}
+                        @else {{$subcategory->subcategory_name_fr  }} @endif
+                      </h2>
+                      </a>
+
                     @php
                      $subsubcategories = App\Models\SubSubCategory::where('subcategory_id',$subcategory->id)->orderBy('id','asc')->get();
                     @endphp
                     @foreach ($subsubcategories as $subsubcategory)
                     <ul class="links">
-                    <li><a href="#">
+                    <li><a href="{{ url('product/subsubcategory/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_fr) }}">
                     @if(session()->get('language') == 'english')
                     {{ $subsubcategory->subsubcategory_name_en }}
                     @else {{$subsubcategory->subsubcategory_name_fr  }} @endif
