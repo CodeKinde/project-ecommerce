@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Expr\Cast\Array_;
 
 class IndexController extends Controller
 {
@@ -137,5 +138,27 @@ class IndexController extends Controller
         $products = Product::where('status',1)->where('subsubcategory_id',$subsubcateg_id)->orderBy('id','desc')->paginate(6);
         $categories = Category::orderBy('category_name_en','asc')->get();
         return view('frontend.product.sub_subcategory_view',compact('products','categories'));
+    }
+
+    public function ProductViewModal($id){
+        $product = Product::with(['category','brand'])->findOrFail($id);
+        $color_fr = $product->product_color_fr;
+        $product_color_fr = explode(',',$color_fr);
+
+        $color_en = $product->product_color_en;
+        $product_color_en = explode(',',$color_en);
+
+        $size_fr = $product->product_size_fr;
+        $product_size_fr = explode(',',$size_fr);
+
+        $size_en = $product->product_size_en;
+        $product_size_en = explode(',',$size_en);
+        return response()->json(array(
+            'product' => $product,
+            'color_fr' => $product_color_fr,
+            'color_en' => $product_color_en,
+            'size_fr' => $product_size_fr,
+            'size_en' => $product_size_en,
+        ));
     }
 }

@@ -146,7 +146,7 @@ Route::prefix('product')->group(function(){
 
   Route::get('/active/{id}','ProductActive')->name('product.active');
 
-  Route::get('/details/{id}','ProductDetails')->name('product.details');
+  Route::get('product/details/{id}','ProductDetails')->name('product.details');
 
   Route::get('/delete/{id}','ProductDelete')->name('product.delete');
 
@@ -217,5 +217,7 @@ Route::get('product/subcategory/{subcateg_id}/{slug}',[IndexController::class,'S
 
 //frontend product sub subcategory
 Route::get('product/subsubcategory/{subsubcateg_id}/{slug}',[IndexController::class,'SubSubCategoryWiseProduct']);
+///start Product view modal with ajax
+Route::get('product/view/modal/{id}',[IndexController::class,'ProductViewModal']);
 
 
