@@ -59,6 +59,8 @@
 <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <!--////////////// Add to cart Modal  product start//////////-->
 
@@ -69,7 +71,7 @@
           <h5 class="modal-title" id="exampleModalLabel">
               @if(session()->get('language') == 'english')
             <span id="pname_en"></span> @else <span id="pname_fr"></span> @endif</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -111,12 +113,12 @@
                 <div class="form-group">
 
                     @if(session()->get('language') == 'english')
-                    <label for="">choose color</label>
-                    <select name="color_en" id="" class="form-control">
+                    <label for="color_en">choose color</label>
+                    <select name="color_en" id="color_en" class="form-control">
                     </select>
                     @else
-                    <label for="">choisie la couleur</label>
-                    <select name="color_fr" id="" class="form-control">
+                    <label for="color_fr">choisie la couleur</label>
+                    <select name="color_fr" id="color_fr" class="form-control">
                     </select>
                      @endif
 
@@ -124,24 +126,25 @@
 
                 <div class="form-group" id="sizeArray">
                     @if(session()->get('language') == 'english')
-                    <label for="">choose Taille</label>
-                    <select name="size_en" id="" class="form-control">
+                    <label for="size_en">choose Taille</label>
+                    <select name="size_en" id="size_en" class="form-control">
                     </select>
                     @else
-                    <label for="">choisie la Taille</label>
-                    <select name="size_fr" id="" class="form-control">
+                    <label for="size_fr">choisie la Taille</label>
+                    <select name="size_fr" id="size_fr" class="form-control">
                     </select>
                      @endif
                 </div><!--end form -->
 
                 <div class="form-group">
-                    <label for="">
+                    <label for="qty">
                     @if(session()->get('language') == 'english')
                       Quantity @else Quantié @endif
                   </label>
-                    <input type="number" name="" id="" class="form-control">
+                    <input type="number" name="" id="qty" class="form-control" min="1" value="1">
                 </div> <!--end form -->
-                <button type="submit" class="btn btn-primary">
+                <input type="hidden"  id="product_id">
+                <button type="submit" class="btn btn-primary" onclick="addToCart()">
                     @if(session()->get('language') == 'english')
                     Add To cart @else Ajouter au panier @endif</button>
             </div><!--col-md-4 -->
@@ -177,6 +180,9 @@
              $('#pbrand').text(data.product.brand.brand_name_en);
              $('#pimage').attr('src','/'+data.product.product_thambnail);
 
+             $('#product_id').val(id);
+             $('#qty').val(1);
+
              //product price
              if(data.product.discount_price == null){
                 $('#pprice').text("");
@@ -207,7 +213,6 @@
 
                 $('#rupture').text('Rupture de stock');
                 $('#stockout').text('Stockout');
-
              }
 
              //End product stock
@@ -249,6 +254,121 @@
             }
         })
     }
+  ///End Product view modal with ajax
+
+  ///Start add product to cart
+  function addToCart(){
+        var id = $('#product_id').val();
+        var product_name_fr = $('#pname_fr').text();
+        var color_fr = $('#color_en option:selected').text();
+        var size_fr = $('#size_en option:selected').text();
+        var quantity = $('#qty').val();
+        $.ajax({
+            type:'POST',
+            dataType:"json",
+            data:{
+                product_name_fr:product_name_fr,color_fr:color_fr,size_fr:size_fr,quantity:quantity
+            },
+            url:"/cart/data/store/"+id,
+            success:function(data){
+                miniCart();
+                $('#closeModel').click();
+                //console.log(data);
+            //start message
+        const Toast = Swal.mixin({
+                toast:true,
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            if($.isEmptyObject(data.error)){
+                Toast.fire({
+                    type:'success',
+                    title: data.success
+                })
+            }else{
+                Toast.fire({
+                    type:'error',
+                    title: data.error
+                })
+            }
+        //End message
+
+         }
+        });
+    }
+ ///End add product to cart
     </script>
+   <!--start get product mini cart -->
+<script type="text/javascript">
+
+function miniCart(){
+$.ajax({
+    type:"GET",
+    url:"/product/mini/cart",
+    dataType:"json",
+    success:function(response){
+        $('span[id="cartSubTotal"]').text(response.cartTotal);
+        $('#cartQty').text(response.cartQty);
+        var miniCart =""
+        $.each(response.carts, function(key, value){
+            miniCart +=`<div class="cart-item product-summary">
+            <div class="row">
+                <div class="col-xs-4">
+                <div class="image"> <a href="detail.html"><img src="/${value.options.image}" alt=""></a> </div>
+                </div>
+                <div class="col-xs-7">
+                <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                <div class="price">${value.price} * ${value.qty}</div>
+                </div>
+                <button type="submit" class="btn btn-danger" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i> </button>
+            </div>
+            </div>
+            <!-- /.cart-item -->
+            <div class="clearfix"></div>
+            <hr>`
+        });
+        $('#miniCart').html(miniCart);
+    }
+})
+}
+miniCart();
+/// mini Cart remove start
+function miniCartRemove(rowId){
+
+    $.ajax({
+        type:'GET',
+        url:"/minicart/product-remove/"+rowId,
+        dataType:'json',
+        success:function(data){
+            miniCart();
+            //End message
+            const Toast = Swal.mixin({
+                toast:true,
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            if($.isEmptyObject(data.error)){
+                Toast.fire({
+                    type:'error',
+                    title: data.success
+                })
+            }else{
+                Toast.fire({
+                    type:'error',
+                    title: data.error
+                })
+            }
+            //End message
+
+        }
+    })
+}
+</script>
+<!--End get product mini cart-->
+
 </body>
 </html>
