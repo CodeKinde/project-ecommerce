@@ -30,4 +30,14 @@ class WishlistController extends Controller
             "]);
         }
     }
+
+    public function WishlistView(){
+
+        return view('frontend.wishlist.view_wishlist');
+    }
+
+    public function GetWishlistProduct(){
+     $wishlist = Wishlist::with('product')->where('user_id',Auth::id())->latest()->get();
+     return response()->json($wishlist);
+    }
 }

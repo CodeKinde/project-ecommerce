@@ -452,7 +452,56 @@ function AddToWishlist(product_id){
     })
 }
 </script>
+<!--/// start get wishlist product fr-->
+<script type="text/javascript">
 
+function wishlist(){
+ $.ajax({
+     type:"GET",
+     url:"/get-wishlist-product",
+     dataType:'json',
+     success:function(response){
+         //console.log(response);
+        var rows = ""
+        $.each(response,function(key,value){
+          rows +=`<tr>
+            <td class="col-md-2"><img src="/${value.product.product_thambnail}" alt="imga"></td>
+            <td class="col-md-7">
+            <div class="product-name"><a href="#">
+             @if(session()->get('language') ==  'english')
+             ${value.product.product_name_en}
+             @else
+             ${value.product.product_name_fr}
+             @endif
+            </a></div>
+            <div class="price">
+                ${value.product.discount_price == null
+                    ? `$ ${value.product.selling_price}`
+                    : `$ ${value.product.discount_price} <span>$ ${value.product.selling_price} </span>
+                    `
+                    }
+            </div>
+            </td>
+            <td class="col-md-2">
+                @if (session()->get('language') == 'english')
+                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary icon" type="button" title="Add Cart" id="${value.product_id }" onclick="productView(this.id)">Add to Cart </button>
+                @else
+                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary icon" type="button" title="Add Cart" id="${value.product_id }" onclick="productView(this.id)">Ajouter au panier </button>
+                @endif
+
+            </td>
+            <td class="col-md-1 close-btn">
+                <a href="#" class=""><i class="fa fa-times"></i></a>
+            </td>
+        </tr>`
+        });
+        $('#wishlist').html(rows);
+     }
+ })
+}
+wishlist();
+</script>
+<!--/// End get wishlist product -->
 
 </body>
 </html>
