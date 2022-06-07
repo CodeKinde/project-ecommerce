@@ -240,5 +240,10 @@ Route::post('/add-to-wishlist/{product_id}',[WishlistController::class,'AddToWis
 //add product to wishliste
 Route::get('/wishlist/view',[WishlistController::class,'WishlistView'])->name('wishlist');
 
-//get  wishliste product fr
+//get  wishlist product
 Route::get('/get-wishlist-product',[WishlistController::class,'GetWishlistProduct']);
+
+//remove  wishlist product
+Route::get('/wishlist/productfr-remove/{id}',[WishlistController::class,'RemoveWishlistProductFr']);
+
+Route::get('/wishlist/product-remove/{id}',[WishlistController::class,'RemoveWishlistProduct']);

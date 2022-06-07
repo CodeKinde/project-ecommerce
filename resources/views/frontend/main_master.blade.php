@@ -485,14 +485,16 @@ function wishlist(){
             <td class="col-md-2">
                 @if (session()->get('language') == 'english')
                 <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary icon" type="button" title="Add Cart" id="${value.product_id }" onclick="productView(this.id)">Add to Cart </button>
+            </td>
+                <td class="col-md-1 close-btn">
+                    <button type="submit" class="btn btn-danger" id="${value.id}" onclick="wishlistRemove(this.id)"><i class="fa fa-times"></i></button>                </td>
                 @else
                 <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary icon" type="button" title="Add Cart" id="${value.product_id }" onclick="productView(this.id)">Ajouter au panier </button>
-                @endif
-
             </td>
             <td class="col-md-1 close-btn">
-                <a href="#" class=""><i class="fa fa-times"></i></a>
+                <button type="submit" class="btn btn-danger" id="${value.id}" onclick="wishlistRemoveFr(this.id)"><i class="fa fa-times"></i></button>
             </td>
+                @endif
         </tr>`
         });
         $('#wishlist').html(rows);
@@ -500,6 +502,75 @@ function wishlist(){
  })
 }
 wishlist();
+
+
+///start remove wishlist product
+function wishlistRemoveFr(id){
+
+$.ajax({
+    type:'GET',
+    url:"/wishlist/productfr-remove/"+id,
+    dataType:'json',
+    success:function(data){
+        wishlist();
+        //End message
+        const Toast = Swal.mixin({
+            toast:true,
+            position: 'top-end',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500
+            })
+        if($.isEmptyObject(data.error)){
+            Toast.fire({
+                type:'error',
+                title: data.success
+            })
+        }else{
+            Toast.fire({
+                type:'error',
+                title: data.error
+            })
+        }
+        //End message
+
+    }
+})
+}
+
+function wishlistRemove(id){
+
+$.ajax({
+    type:'GET',
+    url:"/wishlist/product-remove/"+id,
+    dataType:'json',
+    success:function(data){
+        wishlist();
+        //End message
+        const Toast = Swal.mixin({
+            toast:true,
+            position: 'top-end',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500
+            })
+        if($.isEmptyObject(data.error)){
+            Toast.fire({
+                type:'error',
+                title: data.success
+            })
+        }else{
+            Toast.fire({
+                type:'error',
+                title: data.error
+            })
+        }
+        //End message
+
+    }
+})
+}
+/// End  remove  wishlist product
 </script>
 <!--/// End get wishlist product -->
 
