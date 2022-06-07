@@ -3,6 +3,9 @@
 @section('title')
 shop on line edit profile
 @endsection
+@php
+$user = DB::table('users',Auth::id())->first();
+@endphp
 <div class="body-content">
 <div class="container">
 <div class="row">

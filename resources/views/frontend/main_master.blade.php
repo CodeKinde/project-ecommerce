@@ -144,9 +144,12 @@
                     <input type="number" name="" id="qty" class="form-control" min="1" value="1">
                 </div> <!--end form -->
                 <input type="hidden"  id="product_id">
-                <button type="submit" class="btn btn-primary" onclick="addToCart()">
-                    @if(session()->get('language') == 'english')
-                    Add To cart @else Ajouter au panier @endif</button>
+                @if(session()->get('language') == 'english')
+                <button type="submit" class="btn btn-primary" onclick="addToCartEn()">
+                    Add To cart </button> @else
+                 <button type="submit" class="btn btn-primary" onclick="addToCart()">
+                     Ajouter au panier </button>
+                    @endif
             </div><!--col-md-4 -->
           </div><!--end row -->
 
@@ -256,21 +259,22 @@
     }
   ///End Product view modal with ajax
 
-  ///Start add product to cart
+  ///Start add product to cart fr
   function addToCart(){
         var id = $('#product_id').val();
         var product_name_fr = $('#pname_fr').text();
-        var color_fr = $('#color_en option:selected').text();
-        var size_fr = $('#size_en option:selected').text();
+        var color_fr= $('#color_fr option:selected').text();
+        var size_fr = $('#size_fr option:selected').text();
         var quantity = $('#qty').val();
         $.ajax({
             type:'POST',
             dataType:"json",
             data:{
-                product_name_fr:product_name_fr,color_fr:color_fr,size_fr:size_fr,quantity:quantity
+                product_name_fr:product_name_fr, color_fr:color_fr,size_fr:size_fr, quantity:quantity
             },
             url:"/cart/data/store/"+id,
             success:function(data){
+                console.log(data);
                 miniCart();
                 $('#closeModel').click();
                 //console.log(data);
@@ -298,11 +302,56 @@
          }
         });
     }
- ///End add product to cart
-    </script>
-   <!--start get product mini cart -->
-<script type="text/javascript">
+ ///End add product to cart fr
 
+   ///Start add product to cart fr
+   function addToCartEn(){
+        var id = $('#product_id').val();
+        var product_name_en = $('#pname_en').text();
+        var color_en = $('#color_en option:selected').text();
+        var size_en = $('#size_en option:selected').text();
+        var quantity = $('#qty').val();
+        $.ajax({
+            type:'POST',
+            dataType:"json",
+            data:{
+                product_name_en:product_name_en, color_en:color_en, size_en:size_en,quantity:quantity
+            },
+            url:"/cartEn/data/store/"+id,
+            success:function(data){
+                console.log(data);
+                miniCart();
+                $('#closeModel').click();
+                //console.log(data);
+            //start message
+        const Toast = Swal.mixin({
+                toast:true,
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            if($.isEmptyObject(data.error)){
+                Toast.fire({
+                    type:'success',
+                    title: data.success
+                })
+            }else{
+                Toast.fire({
+                    type:'error',
+                    title: data.error
+                })
+            }
+        //End message
+
+         }
+        });
+    }
+ ///End add product to cart fr
+    </script>
+
+<script type="text/javascript">
+//<!--start get product mini cart -->
 function miniCart(){
 $.ajax({
     type:"GET",
@@ -334,6 +383,7 @@ $.ajax({
 })
 }
 miniCart();
+ ///<!--End get product mini cart-->
 /// mini Cart remove start
 function miniCartRemove(rowId){
 
@@ -367,8 +417,42 @@ function miniCartRemove(rowId){
         }
     })
 }
+/// End mini Cart remove start
 </script>
-<!--End get product mini cart-->
+<script type="text/javascript">
+function AddToWishlist(product_id){
+    $.ajax({
+        type:"POST",
+        url:"/add-to-wishlist/"+product_id,
+        dataType:'json',
+        success:function(data){
+        //End message
+        const Toast = Swal.mixin({
+            toast:true,
+            position: 'top-end',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+            })
+        if($.isEmptyObject(data.error)){
+            Toast.fire({
+                type:'success',
+                icon:'success',
+                title: data.success
+            })
+        }else{
+            Toast.fire({
+                type:'error',
+                icon:'error',
+                title: data.error
+            })
+        }
+        //End message
+        }
+    })
+}
+</script>
+
 
 </body>
 </html>

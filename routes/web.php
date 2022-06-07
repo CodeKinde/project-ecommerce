@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -224,10 +225,16 @@ Route::get('product/view/modal/{id}',[IndexController::class,'ProductViewModal']
 ///start Product add to cart with ajax
 Route::post('cart/data/store/{id}',[CartController::class,'AddToCart']);
 
+Route::post('cartEn/data/store/{id}',[CartController::class,'AddToCartEn']);
+
+
 ///start get product mini cart
 Route::get('/product/mini/cart/',[CartController::class,'AddMiniCart']);
 
 //remove product mini cart
 Route::get('/minicart/product-remove/{rowId}',[CartController::class,'RemoveMiniCart']);
+
+//add product to wishliste
+Route::post('/add-to-wishlist/{product_id}',[WishlistController::class,'AddToWishlist']);
 
 
