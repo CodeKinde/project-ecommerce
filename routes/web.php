@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\User\CartPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -247,6 +248,18 @@ Route::get('/get-wishlist-product',[WishlistController::class,'GetWishlistProduc
 //remove  wishlist product
 Route::get('/wishlist/productfr-remove/{id}',[WishlistController::class,'RemoveWishlistProductFr']);
 
-Route::get('/wishlist/product-remove/{id}',[WishlistController::class,'RemoveWishlistProduct']);
+Route::get('/wishlist/product-remove/{id}',[WishlistController::class,'RemoveWishlistProduct'])
+;
+//my cart Page
+Route::get('/myCart',[CartPageController::class,'MyCart'])->name('myCart');
+
+Route::get('/get-cart-product',[CartPageController::class,'GetCartProduct']);
+
+Route::get('/cart-remove/{rowId}',[CartPageController::class,'RemoveCartProduct']);
+
+Route::get('/cart-increment/{rowId}',[CartPageController::class,'CartIncrement']);
+
+Route::get('/cart-decrement/{rowId}',[CartPageController::class,'CartDecrement']);
+
 
 });

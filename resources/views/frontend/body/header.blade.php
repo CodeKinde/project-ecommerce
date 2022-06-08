@@ -14,7 +14,7 @@
             @if(session()->get('language') ==  'english') Wishlist
             @else Liste de Souhaits @endif </a></li>
 
-            <li><a href="#"><i class="icon fa fa-shopping-cart"></i>
+            <li><a href="{{ route('myCart') }}"><i class="icon fa fa-shopping-cart"></i>
             @if(session()->get('language') ==  'english') My Cart
             @else Mon Panier  @endif </a></li>
 

@@ -274,7 +274,7 @@
             },
             url:"/cart/data/store/"+id,
             success:function(data){
-                console.log(data);
+                //console.log(data);
                 miniCart();
                 $('#closeModel').click();
                 //console.log(data);
@@ -452,7 +452,7 @@ function AddToWishlist(product_id){
     })
 }
 </script>
-<!--/// start get wishlist product fr-->
+<!--/// start get wishlist product fr------------------------------->
 <script type="text/javascript">
 
 function wishlist(){
@@ -465,15 +465,14 @@ function wishlist(){
         var rows = ""
         $.each(response,function(key,value){
           rows +=`<tr>
-            <td class="col-md-2"><img src="/${value.product.product_thambnail}" alt="imga"></td>
+            <td class="col-md-1"><img src="/${value.product.product_thambnail}" alt="imga" style="width:80px; height:80px"></td>
             <td class="col-md-7">
             <div class="product-name"><a href="#">
              @if(session()->get('language') ==  'english')
              ${value.product.product_name_en}
              @else
              ${value.product.product_name_fr}
-             @endif
-            </a></div>
+             @endif </a></div>
             <div class="price">
                 ${value.product.discount_price == null
                     ? `$ ${value.product.selling_price}`
@@ -482,7 +481,7 @@ function wishlist(){
                     }
             </div>
             </td>
-            <td class="col-md-2">
+            <td class="col-md-1">
                 @if (session()->get('language') == 'english')
                 <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary icon" type="button" title="Add Cart" id="${value.product_id }" onclick="productView(this.id)">Add to Cart </button>
             </td>
@@ -572,7 +571,131 @@ $.ajax({
 }
 /// End  remove  wishlist product
 </script>
-<!--/// End get wishlist product -->
+<!--/// End get wishlist product ----------------------------->
+
+<!--/// Load My acrt -->
+<script type="text/javascript">
+  function cart(){
+     $.ajax({
+         type:"GET",
+         url:"/user/get-cart-product",
+         dataType:'json',
+         success:function(response){
+            var rows = ""
+         $.each(response.carts,function(key,value){
+                //console.log(response.carts);
+        rows +=`<tr>
+        <td class="romove-item">
+        <button type="submit" class="btn btn-default" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-trash-o"></i></button>
+        </td>
+        <td class="cart-image">
+            <img src="/${value.options.image}" alt="" style='width:60px; height:60px;'>
+        </td>
+        <td class="cart-product-name-info">
+            <h4 class='cart-product-description'>
+                ${value.name}
+            </h4>
+
+            <div class="cart-product-info">
+            <span class="product-color">COLOR:<span>${value.options.color_fr}</span>;  Size:${value.options.size_fr == null
+                ? `<span>....</span>`
+                :`<span>${value.options.size_fr}</span>`
+            }</span>
+            </div>
+        </td>
+
+        <td class="cart-product-sub-total"><span class="cart-sub-total-price">
+            $${value.price}</span></td>
+
+            <td class="col-md-2">
+             ${value.qty > 1
+             ? `<button type="submit" class="btn btn-sm btn-danger" id="${value.rowId}"       onclick="cartDecrement(this.id)">-</button>`
+
+             : `<button type="submit" class="btn btn-sm btn-danger" id="${value.rowId}" onclick="cartDecrement(this.id)" disabled>-</button>`
+             }
+
+            <input type="text" value="${value.qty}" style="width: 25px;" min="1" disabled>
+
+            <button type="submit" class=" btn btn-sm btn-success" id="${value.rowId}" onclick="cartIncrement(this.id)">+</button>
+
+           </td>
+
+            <td class="cart-product-sub-total"><span class="cart-sub-total-price">
+            $${value.subtotal}</span></td>
+        </tr>`
+    });
+    $('#cartPage').html(rows);
+            }
+        })
+        }
+    cart();
+///start remove cart product
+    function cartRemove(rowId){
+
+    $.ajax({
+        type:'GET',
+        url:"/user/cart-remove/"+rowId,
+        dataType:'json',
+        success:function(data){
+            cart();
+            miniCart();
+            //End message
+            const Toast = Swal.mixin({
+                toast:true,
+                position: 'top-end',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            if($.isEmptyObject(data.error)){
+                Toast.fire({
+                    type:'error',
+                    title: data.success
+                })
+            }else{
+                Toast.fire({
+                    type:'error',
+                    title: data.error
+                })
+            }
+            //End message
+        }
+    })
+    }
+///-------Cart Increment-------///
+function cartIncrement(rowId){
+    $.ajax({
+        type:'GET',
+        url:"/user/cart-increment/"+rowId,
+        dataType:"json",
+        success:function(data){
+            cart();
+            miniCart();
+        }
+    });
+}
+///------En Cart Increment-------///
+
+///-------Cart Increment-------///
+function cartDecrement(rowId){
+    $.ajax({
+        type:'GET',
+        url:"/user/cart-decrement/"+rowId,
+        dataType:"json",
+        success:function(data){
+            cart();
+            miniCart();
+        }
+    });
+}
+///------En Cart Increment-------///
+
+ </script>
+    <!-- ///End remove cart product -->
+
+
+<!--///End Load My acrt -->
+
 
 </body>
 </html>
