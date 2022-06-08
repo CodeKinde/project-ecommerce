@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -179,6 +180,19 @@ Route::prefix('slider')->group(function(){
 
     });
 
+});
+
+//**Admin Coupon all route **************************************/
+Route::prefix('coupon')->group(function(){
+    Route::controller(CouponController::class)->group(function(){
+        Route::get('/view','CouponView')->name('coupon.view');
+        Route::get('/add','CouponAdd')->name('coupon.add');
+        Route::post('/store','CouponStore')->name('coupon.store');
+        Route::get('/edit/{id}','CouponEdit')->name('coupon.edit');
+        Route::post('/update','CouponUpdate')->name('coupon.update');
+        Route::get('/delete/{id}','CouponDelete')->name('coupon.delete');
+
+    });
 });
 
 
