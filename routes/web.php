@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
@@ -194,6 +195,45 @@ Route::prefix('coupon')->group(function(){
 
     });
 });
+
+//**Admin Shipping Area all route **************************************/
+Route::prefix('shipping')->group(function(){
+    Route::controller(ShippingAreaController::class)->group(function(){
+        ///ship division
+        Route::get('/division/view/add','DivisionView')->name('division.view');
+
+        Route::post('division/store','DivisionStore')->name('division.store');
+
+        Route::get('division/edit/{id}','DivisionEdit')->name('division.edit');
+
+        Route::post('division/update','DivisionUpdate')->name('division.update');
+
+        Route::get('division/delete/{id}','DivisionDelete')->name('division.delete');
+
+         ///ship district
+         Route::get('/district/view/add','DistrictView')->name('district.view');
+
+         Route::post('district/store','DistrictStore')->name('district.store');
+
+         Route::get('district/edit/{id}','DistrictEdit')->name('district.edit');
+
+         Route::post('district/update','DistrictUpdate')->name('district.update');
+
+         Route::get('district/delete/{id}','DistrictDelete')->name('district.delete');
+
+        ///ship state
+        Route::get('/state/view/add','StateView')->name('state.view');
+
+        Route::post('/state/store','StateStore')->name('state.store');
+
+        Route::get('/state/edit/{id}','StateEdit')->name('state.edit');
+
+        Route::post('/state/update','StateUpdate')->name('state.update');
+
+        Route::get('/state/delete/{id}','StateDelete')->name('state.delete');
+    });
+});
+
 
 
 Route::middleware(['auth:sanctum,web', config('jetstream.auth_session'),'verified'

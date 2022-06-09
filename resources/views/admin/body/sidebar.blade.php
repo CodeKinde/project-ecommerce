@@ -107,6 +107,28 @@
             </ul>
           </li>
 
+          <li class="treeview {{ ($prefix == '/coupon') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="inbox"></i>
+              <span>Zone d'expédition</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'division.view') ? 'active' : '' }}">
+              <a href="{{ route('division.view') }}"><i class="ti-more"></i>Division</a></li>
+
+              <li class="{{ ($route == 'district.view') ? 'active' : '' }}">
+                <a href="{{ route('district.view') }}"><i class="ti-more"></i>District</a></li>
+
+            <li class="{{ ($route == 'state.view') ? 'active' : '' }}">
+                <a href="{{ route('state.view') }}"><i class="ti-more"></i>State</a></li>
+
+
+            </ul>
+          </li>
+
 
         <li class="header nav-small-cap">User Interface</li>
 
