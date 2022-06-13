@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -315,5 +316,17 @@ Route::get('/cart-increment/{rowId}',[CartPageController::class,'CartIncrement']
 
 Route::get('/cart-decrement/{rowId}',[CartPageController::class,'CartDecrement']);
 
+///frontend coupon apply
+Route::post('/coupon-apply',[CartController::class,'CouponApply']);
+
+Route::get('/coupon-calculation',[CartController::class,'CouponCalculation']);
+
+Route::get('/coupon-remove',[CartController::class,'CouponRemove']);
+
+Route::get('/checkout/create',[CartController::class,'CheckoutCreate'])->name('checkout');
+
+Route::get('/district-get/ajax/{division_id}',[CheckoutController::class,'DistrictGet']);
+
+Route::get('/state-get/ajax/{district_id}',[CheckoutController::class,'StateGet']);
 
 });
