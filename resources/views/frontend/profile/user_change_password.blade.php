@@ -6,17 +6,7 @@ shop on line dasboard
 <div class="body-content">
 <div class="container">
 <div class="row">
-    <div class="col-md-2"><br><br>
-    <img class="card-img-top" style="border-radius:50%" src="{{ (!empty($user->profile_photo_path))? url('upload/user_image/'.$user->profile_photo_path) : url('upload/no_image.jpg') }}" alt="User Avatar"
-    height="100%" width="100%"><br><br><br>
-    <ul class="list-group list-group-flush">
-        <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm btn-block">Home</a>
-        <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block">Modifier profile</a>
-        <a href="" class="btn btn-primary btn-sm btn-block">Changer mot de passe</a>
-        <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Se Deconnectez</a>
-
-    </ul>
-    </div><!--end col-md-2 -->
+    @include('frontend.common.user_sidebar')
 
     <div class="col-md-2">
 

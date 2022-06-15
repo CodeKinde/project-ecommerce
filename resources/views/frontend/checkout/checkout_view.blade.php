@@ -5,7 +5,6 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
@@ -34,7 +33,8 @@
 				<!-- guest-login -->
     <div class="col-md-6 col-sm-6 already-registered-login">
         <h3> Addresse Achat</h3>
-        <form class="register-form" role="form">
+        <form class="register-form" action="{{ route('checkout.store') }}" role="form" method="POST">
+            @csrf
 
             <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Shipping Name <span>*</span></label>
@@ -168,24 +168,24 @@
 	<div class="panel-group">
 		<div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="unicase-checkout-title">Your Checkout Progress</h4>
+            <h4 class="unicase-checkout-title">Select Methode de paiment</h4>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <label for="">Strip</label>
-                <input type="radio" name="payment_method" value="Strip">
+                <input type="radio" name="payment_method" value="stripe">
                 <img src="{{ asset('frontend/assets/images/payments/4.png') }}" alt="">
             </div>
 
             <div class="col-md-4">
                 <label for="">Carte</label>
-                <input type="radio" name="payment_method" value="Card">
+                <input type="radio" name="payment_method" value="card">
                 <img src="{{ asset('frontend/assets/images/payments/3.png') }}" alt="">
             </div>
 
             <div class="col-md-4">
                 <label for="">Espèce</label>
-                <input type="radio" name="payment_method" value="Espèces">
+                <input type="radio" name="payment_method" value="espèces">
                 <img src="{{ asset('frontend/assets/images/payments/2.png') }}" alt="">
             </div>
 

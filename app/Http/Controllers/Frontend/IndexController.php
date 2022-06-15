@@ -58,7 +58,6 @@ class IndexController extends Controller
         $data->name = $request->name;
         $data->email = $request->email;
         $data->mobile = $request->mobile;
-        $data->address = $request->address;
         if($request->file('profile_photo_path')){
             $file = $request->file('profile_photo_path');
             @unlink(public_path('upload/user_image/'.$data->profile_photo_path));

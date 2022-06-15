@@ -9,17 +9,8 @@ $user = DB::table('users',Auth::id())->first();
 <div class="body-content">
 <div class="container">
 <div class="row">
-    <div class="col-md-2"><br><br>
-    <img class="card-img-top" style="border-radius:50%" src="{{ (!empty($user->profile_photo_path))? url('upload/user_image/'.$user->profile_photo_path) : url('upload/no_image.jpg') }}" alt="User Avatar"
-    height="100%" width="100%"><br><br><br>
-    <ul class="list-group list-group-flush">
-        <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm btn-block">Home</a>
-        <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block">Modifier profile</a>
-        <a href="" class="btn btn-primary btn-sm btn-block">Changer mot de passe</a>
-        <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Se Deconnectez</a>
+    @include('frontend.common.user_sidebar')
 
-    </ul>
-    </div><!--end col-md-2 -->
 
     <div class="col-md-2">
 
@@ -48,10 +39,6 @@ $user = DB::table('users',Auth::id())->first();
             <input type="text" name="mobile" id="mobile" class="form-control" value="{{ $user->mobile }}">
             </div>
 
-        <div class="form-group">
-            <label class="info-title" for="exampleInputPassword1">Adresse <span>*</span></label>
-            <input type="text" name="address" id="address" class="form-control" value="{{ $user->address }}">
-            </div>
 
         <div class="form-group">
             <label class="info-title" for="exampleInputPassword1">Iamge profile</span></label>

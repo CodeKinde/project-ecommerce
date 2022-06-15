@@ -1,34 +1,33 @@
 @extends('frontend.main_master')
 @section('content')
-@section('title')
-shop on line dasboard
-@endsection
 <div class="body-content">
 <div class="container">
 <div class="row">
-    <div class="col-md-2"><br><br>
-    <img class="card-img-top" style="border-radius:50%" src="{{ (!empty($user->profile_photo_path))? url('upload/user_image/'.$user->profile_photo_path) : url('upload/no_image.jpg') }}" alt="User Avatar"
-    height="100%" width="100%"><br><br><br>
-    <ul class="list-group list-group-flush">
-        <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm btn-block">Home</a>
-        <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block">Modifier profile</a>
-        <a href="{{ route('user.change.password') }}" class="btn btn-primary btn-sm btn-block">Changer mot de passe</a>
-        <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Se Deconnectez</a>
+   @include('frontend.common.user_sidebar')
+                <!--// end col md-2 -->
+                <div class="col-md-2">
 
-    </ul>
-    </div><!--end col-md-2 -->
+                </div>
+                <!--// end col md-2 -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <h3 class="text-center"><span class="text-danger">Hi...</span><strong>
+                                {{ Auth::user()->name }}
+                            </strong>
+                            Welcome To Amkasugu online
+                        </h3>
 
-    <div class="col-md-2">
+                    </div>
 
-    </div><!--end col-md-2 -->
+                </div>
+                <!--// end col md-6 -->
 
+            </div>
+            <!--// end row -->
 
-    <div class="col-md-6">
-        <div class="card">
-            <h3 class="text-center"><span class="text-danger">Salut...</span><strong>{{ Auth::user()->name }}</strong> Bienvenue sur ecommerce en ligne</h3>
         </div>
-    </div><!--end col-md-2 -->
-</div><!--end row -->
-</div>
-</div>
+
+    </div>
+
+
 @endsection

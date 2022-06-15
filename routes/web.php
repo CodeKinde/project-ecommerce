@@ -14,8 +14,10 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,9 +31,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 //Route::middleware(['auth:admin'])->group(function(){
 
 Route::middleware('admin:admin')->group(function(){
@@ -188,10 +187,15 @@ Route::prefix('slider')->group(function(){
 Route::prefix('coupon')->group(function(){
     Route::controller(CouponController::class)->group(function(){
         Route::get('/view','CouponView')->name('coupon.view');
+
         Route::get('/add','CouponAdd')->name('coupon.add');
+
         Route::post('/store','CouponStore')->name('coupon.store');
+
         Route::get('/edit/{id}','CouponEdit')->name('coupon.edit');
+
         Route::post('/update','CouponUpdate')->name('coupon.update');
+
         Route::get('/delete/{id}','CouponDelete')->name('coupon.delete');
 
     });
@@ -328,5 +332,13 @@ Route::get('/checkout/create',[CartController::class,'CheckoutCreate'])->name('c
 Route::get('/district-get/ajax/{division_id}',[CheckoutController::class,'DistrictGet']);
 
 Route::get('/state-get/ajax/{district_id}',[CheckoutController::class,'StateGet']);
+///frontend Checkout
+Route::post('/checkout/store',[CheckoutController::class,'CheckoutStore'])->name('checkout.store');
+
+Route::post('/stripe/order',[StripeController::class,'StripeOrder'])->name('stripe.order');
+
+Route::get('/my/order',[AllUserController::class,'MyOrderView'])->name('my.order');
+
+Route::get('/order-detail/{order_id}',[AllUserController::class,'OrderDetail']);
 
 });
