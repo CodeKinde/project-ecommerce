@@ -3,9 +3,7 @@
 @section('title')
 shop on line edit profile
 @endsection
-@php
-$user = DB::table('users',Auth::id())->first();
-@endphp
+
 <div class="body-content">
 <div class="container">
 <div class="row">
@@ -22,11 +20,11 @@ $user = DB::table('users',Auth::id())->first();
             <h3 class="text-center"><span class="text-danger">Modifier votre profile</h3>
         </div>
         <div class="card-body">
-        <form action="{{ route('user.profile.store') }}" method="post" enctype="multipart/form-data">
+ <form action="{{ route('user.profile.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
             <label class="info-title" for="exampleInputPassword1">Nom & prénom <span>*</span></label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}">
+    <input type="text" name="name" id="name" class="form-control" value="{{$user->name}}">
             </div>
 
         <div class="form-group">

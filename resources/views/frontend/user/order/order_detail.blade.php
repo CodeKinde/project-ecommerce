@@ -12,7 +12,7 @@ commande details
       <div class="col-md-5">
         <div class="card">
           <div class="card-header"> <h3><u>Achat Details</u></h3> </div>
-         <div class="card-body" style="background: #E9EBEC">
+          <div class="card-body" style="background: #E9EBEC">
             <table class="table">
                 <tr>
                     <th>Nom :</th>
@@ -66,7 +66,7 @@ commande details
        <div class="col-md-5">
         <div class="card">
           <div class="card-header"> <h4><u>Commande Details</u><span class="text-danger"> Facture N°: {{ $order->invoice_no }}</span></h4> </div>
-         <div class="card-body" style="background: #E9EBEC">
+          <div class="card-body" style="background: #E9EBEC">
             <table class="table">
                 <tr>
                     <th>Nom :</th>
@@ -189,6 +189,16 @@ commande details
             </div>
            </div> <!--// end col md-8 -->
        </div>
+        @if($order->status !== "delivered")
+        @else
+        <form action="">
+            <div class="form-group">
+              <label for="label">Raison de return de la commande:</label>
+           <textarea name="return_reason" id="return_reason" cols="30" rows="5" class="form-control">
+              Return Reason</textarea>
+            </div>
+          </form>
+        @endif
 
             </div> <!--// end row -->
 

@@ -31,6 +31,6 @@ class OrderMail extends Mailable
     {
         $order = $this->data;
         return $this->from("devkinde@gmail.com")->view('mail.order_mail',
-        compact('order'))->subject('Email from Ankasugu online shop');
+        compact('order'))->subject('Email from Amkasugu online shop');
     }
 }

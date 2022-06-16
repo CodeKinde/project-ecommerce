@@ -15,7 +15,7 @@ class ShippingAreaController extends Controller
     public function DivisionView(){
         $divisions = ShipDivision::orderBy('division_name','asc')->get();
 
-        return view('backend.shipping.district.district_view',compact('divisions'));
+        return view('backend.shipping.division.division_view',compact('divisions'));
     }
     public function DivisionStore(Request $request){
 

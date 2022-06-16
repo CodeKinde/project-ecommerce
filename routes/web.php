@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +33,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 //Route::middleware(['auth:admin'])->group(function(){
 
 Route::middleware('admin:admin')->group(function(){
@@ -240,14 +241,37 @@ Route::prefix('shipping')->group(function(){
     });
 });
 
+//order route all
+Route::prefix('order')->group(function(){
+    Route::controller(OrderController::class)->group(function(){
+
+     Route::get('/pending/orders','PendingOrders')->name('pending.order');
+
+     Route::get('/pending/details/{order_id}','PendingOrdersDetails')->name('pending.order.details');
+
+     Route::get('/confirm/orders','ConfirmOrders')->name('confirm.order');
+
+     Route::get('/processing/orders','ProcessingOrders')->name('processing.order');
+
+     Route::get('/picked/orders','PickedOrders')->name('picked.order');
+
+     Route::get('/shipped/orders','ShippedOrders')->name('shipped.order');
+
+     Route::get('/delivered/orders','DeliveredOrders')->name('delivered.order');
+
+
+
+
+    });
+});
+
 
 
 Route::middleware(['auth:sanctum,web', config('jetstream.auth_session'),'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        $id = Auth::user()->id;
-        $user = User::find($id);
-        return view('dashboard',compact('user'));
+
+        return view('dashboard',);
     })->name('dashboard');
 });
 

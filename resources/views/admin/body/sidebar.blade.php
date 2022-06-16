@@ -124,7 +124,35 @@
 
             <li class="{{ ($route == 'state.view') ? 'active' : '' }}">
                 <a href="{{ route('state.view') }}"><i class="ti-more"></i>State</a></li>
+            </ul>
+          </li>
 
+          <li class="treeview {{ ($prefix == '/coupon') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="server"></i>
+              <span>Commandes</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'pending.order') ? 'active' : '' }}">
+              <a href="{{ route('pending.order') }}"><i class="ti-more"></i>Commandes en Attente</a></li>
+
+             <li class="{{ ($route == 'confirm.order') ? 'active' : '' }}">
+             <a href="{{ route('confirm.order') }}"><i class="ti-more"></i>Commandes Confirmé</a></li>
+
+            <li class="{{ ($route == 'processing.order') ? 'active' : '' }}">
+                <a href="{{ route('processing.order') }}"><i class="ti-more"></i>Commandes En traitement</a></li>
+
+            <li class="{{ ($route == 'picked.order') ? 'active' : '' }}">
+            <a href="{{ route('picked.order') }}"><i class="ti-more"></i>Commandes Choisie</a></li>
+
+            <li class="{{ ($route == 'shipped.order') ? 'active' : '' }}">
+             <a href="{{ route('shipped.order') }}"><i class="ti-more"></i>Commandes Expédié</a></li>
+
+             <li class="{{ ($route == 'delivered.order') ? 'active' : '' }}">
+             <a href="{{ route('delivered.order') }}"><i class="ti-more"></i>Commandes Livré</a></li>
 
             </ul>
           </li>

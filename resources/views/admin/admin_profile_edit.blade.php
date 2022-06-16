@@ -58,7 +58,7 @@
            </div>
        </div>
         <div class="text-xs-right">
-        <button type="submit" class="btn btn-rounded btn-info">Mise à jour</button>
+        <input type="submit" class="btn btn-rounded btn-info" value="Mise à jour"/>
         </div>
      </form>
 

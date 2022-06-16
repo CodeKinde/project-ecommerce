@@ -13,7 +13,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Expr\Cast\Array_;
 
 class IndexController extends Controller
 {
@@ -53,8 +52,7 @@ class IndexController extends Controller
     }
 
     public function UserProfileStore(Request $request){
-        $id = Auth::user()->id;
-        $data = User::find($id);
+        $data = User::find(Auth::user()->id);
         $data->name = $request->name;
         $data->email = $request->email;
         $data->mobile = $request->mobile;
