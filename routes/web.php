@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use Illuminate\Support\Facades\Route;
@@ -337,8 +338,12 @@ Route::post('/checkout/store',[CheckoutController::class,'CheckoutStore'])->name
 
 Route::post('/stripe/order',[StripeController::class,'StripeOrder'])->name('stripe.order');
 
+Route::post('/cash/order',[CashController::class,'CashOrder'])->name('cash.order');
+
 Route::get('/my/order',[AllUserController::class,'MyOrderView'])->name('my.order');
 
 Route::get('/order-detail/{order_id}',[AllUserController::class,'OrderDetail']);
+
+Route::get('/invoice-download/{order_id}',[AllUserController::class,'InvoiceDownload']);
 
 });

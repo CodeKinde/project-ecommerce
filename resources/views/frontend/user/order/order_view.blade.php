@@ -75,7 +75,7 @@ commande
             <td class="col-md-1">
                 <a href="{{ url('/user/order-detail/'.$item->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
 
-                <a href="" class="btn btn-sm btn-danger" style="color:white;"><i class="fa fa-download"></i> Facture</a>
+                <a target="_black" href="{{ url('/user/invoice-download/'.$item->id) }}" class="btn btn-sm btn-danger" style="color:white; margin-top:5px"><i class="fa fa-download"></i> Facture</a>
             </td>
                 </tr>
                 @endforeach
@@ -83,8 +83,7 @@ commande
              </tbody>
             </table>
         </div>
-       </div>
-        <!--// end col md-6 -->
+       </div> <!--// end col md-8 -->
 
             </div>
             <!--// end row -->

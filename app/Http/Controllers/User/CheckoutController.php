@@ -41,7 +41,7 @@ class CheckoutController extends Controller
         return "Card";
         }else{
 
-          return "Cash";
+            return view('frontend.payment.cash',compact('data','cartTotal'));
         }
 
     }

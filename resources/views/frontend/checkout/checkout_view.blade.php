@@ -186,7 +186,7 @@
             <div class="col-md-4">
                 <label for="">Espèce</label>
                 <input type="radio" name="payment_method" value="espèces">
-                <img src="{{ asset('frontend/assets/images/payments/2.png') }}" alt="">
+                <img src="{{ asset('frontend/assets/images/payments/6.png') }}" alt="">
             </div>
 
         </div><!-- /.row -->
