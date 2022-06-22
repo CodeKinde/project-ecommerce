@@ -40,11 +40,12 @@
                         <td>${{ $item->amount }}</td>
                         <td>{{ $item->payment_method }}</td>
                         <td>
-                        <span class="badge badge-pill badge-success">{{ $item->status }}</span>
+                     <span class="badge badge-pill badge-success">{{ $item->status }}</span>
                       </td>
 
                         <td width="15%">
     <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-primary" title="voir"><i class="fa fa-eye"></i></a>
+
     <a href="{{ route('coupon.delete',$item->id) }}" class="btn btn-danger" id="delete" title="Supprimer"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>

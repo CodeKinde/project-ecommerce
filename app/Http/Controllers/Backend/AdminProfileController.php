@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -42,11 +43,11 @@ class AdminProfileController extends Controller
         return redirect()->route('admin.profile')->with($notification);
     }
 
+
     public function AdminChangePassword(){
 
         return view('admin.admin_change_password');
     }
-
     public function UpdateChangePassword(Request $request){
         $validateData = $request->validate([
             'oldpassword' => 'required',
@@ -63,5 +64,10 @@ class AdminProfileController extends Controller
         }else{
             return redirect()->back();
         }
+    }
+
+    public function AllUserView(){
+        $users = User::latest()->get();
+        return view('backend.user.all_user',compact('users'));
     }
 }

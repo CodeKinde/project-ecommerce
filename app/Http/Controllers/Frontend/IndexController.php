@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
@@ -36,8 +37,9 @@ class IndexController extends Controller
 
         //return $ski_category->id;
         //die();
+        $blogpost = BlogPost::latest()->get();
 
-        return view('frontend.index',compact('sliders','categories','products','featured','special_offer','special_deals','skip_category_0','skip_product_0','skip_subcategory_0','skip_sproduct_0','skip_brand_1','skip_brand_product_1'));
+        return view('frontend.index',compact('sliders','categories','products','featured','special_offer','special_deals','skip_category_0','skip_product_0','skip_subcategory_0','skip_sproduct_0','skip_brand_1','skip_brand_product_1','blogpost'));
     }
 
     public function UserLogout(){

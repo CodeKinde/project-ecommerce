@@ -14,6 +14,11 @@ $user = App\Models\User::find($id);
 
         <a href="{{route('my.order')}}" class="btn btn-primary btn-sm btn-block">Commandes</a>
 
+        <a href="{{route('order.return.list')}}" class="btn btn-primary btn-sm btn-block">Commande Return</a>
+
+        <a href="{{route('cancel-order')}}" class="btn btn-primary btn-sm btn-block">Commande Annulé</a>
+
+
         <a href="{{route('user.logout')}}" class="btn btn-danger btn-sm btn-block">Logout</a>
 
     </ul>

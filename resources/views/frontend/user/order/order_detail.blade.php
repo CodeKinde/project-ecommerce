@@ -189,15 +189,28 @@ commande details
             </div>
            </div> <!--// end col md-8 -->
        </div>
-        @if($order->status !== "delivered")
+        @if($order->status !== "Livré")
         @else
-        <form action="">
+        @php
+         $order = App\Models\Order::where('id',$order->id)->where('return_reason','=',null)->first();
+        @endphp
+        @if($order)
+
+        <form action="{{ route('order-return',$order->id) }}" method="POST">
+            @csrf
             <div class="form-group">
               <label for="label">Raison de return de la commande:</label>
-           <textarea name="return_reason" id="return_reason" cols="30" rows="5" class="form-control">
+           <textarea name="return_reason" id="return_reason" cols="30" rows="5" class="form-control" required>
               Return Reason</textarea>
             </div>
+            <button type="submit" class="btn btn-danger">Submit</button>
           </form>
+          @else
+          <span class="badge badge-pill badge-warning" style="background:red">
+            Vous avez une demande de retour pour ce produit
+        </span>
+          @endif
+          <br><br>
         @endif
 
             </div> <!--// end row -->

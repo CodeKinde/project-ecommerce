@@ -17,7 +17,7 @@ use Laravel\Fortify\Http\Requests\LoginRequest;
 use App\Actions\Fortify\AttemptToAuthenticate;
 use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
 use App\Http\Responses\LoginResponse;
-
+use PhpParser\Node\Stmt\If_;
 
 class AdminController extends Controller
 {
@@ -111,6 +111,7 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return app(LogoutResponse::class);
+
     }
 }
 

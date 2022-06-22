@@ -37,15 +37,16 @@
                      <tr>
                         <td>{{ $item->order_date }}</td>
                         <td>{{ $item->invoice_no }}</td>
-                        <td>{{ $item->amount }}</td>
-                        <td>{{ $item->payment_type }}%</td>
+                        <td>${{ $item->amount }}</td>
+                        <td>{{ $item->payment_method }}</td>
                         <td>
-                        <span class="badge badge-pill badge-success">{{ $item->status }}</span>
+                    <span class="badge badge-pill badge-success">{{ $item->status }}</span>
                       </td>
 
                         <td width="15%">
-                        <a href="{{ route('coupon.edit',$item->id) }}" class="btn btn-primary" title="Modifier"><i class="fa fa-edit"></i></a>
-                         <a href="{{ route('coupon.delete',$item->id) }}" class="btn btn-danger" id="delete" title="Supprimer"><i class="fa fa-trash"></i></a>
+        <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-primary" title="voir"><i class="fa fa-eye"></i></a>
+
+         <a href="{{ route('coupon.delete',$item->id) }}" class="btn btn-danger" id="delete" title="Supprimer"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                      @endforeach

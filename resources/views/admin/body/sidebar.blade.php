@@ -127,7 +127,7 @@
             </ul>
           </li>
 
-          <li class="treeview {{ ($prefix == '/coupon') ? 'active' : '' }}">
+          <li class="treeview {{ ($prefix == '/order') ? 'active' : '' }}">
             <a href="#">
               <i data-feather="server"></i>
               <span>Commandes</span>
@@ -154,8 +154,58 @@
              <li class="{{ ($route == 'delivered.order') ? 'active' : '' }}">
              <a href="{{ route('delivered.order') }}"><i class="ti-more"></i>Commandes Livré</a></li>
 
+             <li class="{{ ($route == 'cancel.order') ? 'active' : '' }}">
+            <a href="{{ route('cancel.order') }}"><i class="ti-more"></i>Commandes Annulé</a></li>
+
             </ul>
           </li>
+
+          <li class="treeview {{ ($prefix == '/report') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="server"></i>
+              <span>Rapports</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'report.view') ? 'active' : '' }}">
+              <a href="{{ route('report.view') }}"><i class="ti-more"></i>Rapport</a></li>
+            </ul>
+          </li>
+
+          <li class="treeview {{ ($prefix == '/blog') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="server"></i>
+              <span>Blog</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'category.view') ? 'active' : '' }}">
+              <a href="{{ route('category.view') }}"><i class="ti-more"></i>Categories</a></li>
+
+              <li class="{{ ($route == 'post.view') ? 'active' : '' }}">
+                <a href="{{ route('post.view') }}"><i class="ti-more"></i>Post</a></li>
+            </ul>
+          </li>
+
+          <li class="treeview {{ ($prefix == '/alluser') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="user"></i>
+              <span>Utilisateurs</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'all-user.view') ? 'active' : '' }}">
+              <a href="{{ route('all-user.view') }}"><i class="ti-more"></i>utilisateur</a></li>
+            </ul>
+          </li>
+
+
 
 
         <li class="header nav-small-cap">User Interface</li>

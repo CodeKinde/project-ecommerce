@@ -3,15 +3,18 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\HomeBlogController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -259,13 +262,67 @@ Route::prefix('order')->group(function(){
 
      Route::get('/delivered/orders','DeliveredOrders')->name('delivered.order');
 
+     Route::get('/cancel/orders','CancelOrders')->name('cancel.order');
 
+     Route::get('/pending/confirm/{order_id}','PendingToConfirm')->name('pending-confirm');
 
+     Route::get('/confirm/processing/{order_id}','ConfirmToProcessing')->name('confirm-processing');
+
+     Route::get('/processing/picked/{order_id}','ProcessingToPicked')->name('processing-picked');
+
+     Route::get('/picked/shipped/{order_id}','PickedToShipped')->name('picked-shipped');
+
+     Route::get('/shipped/delivered/{order_id}','ShippedToDelivered')->name('shipped-delivered');
+
+     Route::get('/invoice/download/{order_id}','InvoiceDownload')->name('invoice.download');
 
     });
+
+    Route::post('/return/order/{order_id}',[AllUserController::class,'ReturnOrder'])->name('order-return');
+
+    Route::get('/return/order/list',[AllUserController::class,'ReturnOrderList'])->name('order.return.list');
+
+    Route::get('/cancel/order',[AllUserController::class,'CancelOrder'])->name('cancel-order');
+
+});
+Route::prefix('report')->group(function(){
+    Route::get('/view',[ReportController::class,'ReportView'])->name('report.view');
 });
 
+Route::get('all-view',[AdminProfileController::class, 'AllUserView'])->name('all-user.view');
 
+//=============blog post route all===================///
+Route::prefix('blog')->group(function(){
+ /// Blog post category
+ Route::get('/blog-post/category/view',[BlogController::class,'BlogCategoryView'])->name('category.view');
+
+ Route::post('/blog-post/category/store',[BlogController::class,'BlogCategoryStore'])->name('category.store');
+
+ Route::get('/blog-post/category/edit/{id}',[BlogController::class,'BlogCategoryEdit'])->name('category.edit');
+
+ Route::post('/blog-post/category/update',[BlogController::class,'BlogCategoryUpdate'])->name('category.update');
+
+ Route::get('/blog-post/category/delete/{id}',[BlogController::class,'BlogCategoryDelete'])->name('category.delete');
+ /// Blog post
+ Route::get('/post/view',[BlogController::class,'BlogPostView'])->name('post.view');
+
+ Route::get('/post/add',[BlogController::class,'BlogPostAdd'])->name('post.add');
+
+ Route::post('/post/store',[BlogController::class,'BlogPostStore'])->name('post.store');
+
+ Route::get('/posts/details/{id}',[BlogController::class,'BlogPostDetails'])->name('post.details');
+
+ Route::get('/post/edit/{id}',[BlogController::class,'BlogPostEdit'])->name('post.edit');
+
+ Route::post('/post/update',[BlogController::class,'BlogPostUpdate'])->name('post.update');
+
+ Route::get('/post/delete/{id}',[BlogController::class,'BlogPostDelete'])->name('post.delete');
+// site setting route All
+
+
+
+
+});
 
 Route::middleware(['auth:sanctum,web', config('jetstream.auth_session'),'verified'
 ])->group(function () {
@@ -371,3 +428,10 @@ Route::get('/order-detail/{order_id}',[AllUserController::class,'OrderDetail']);
 Route::get('/invoice-download/{order_id}',[AllUserController::class,'InvoiceDownload']);
 
 });
+
+///===================Home frontend Blog======================///
+Route::get('/blog',[HomeBlogController::class, 'HomeBlogPost'])->name('home.blog');
+
+Route::get('/blog/post/details/{id}',[HomeBlogController::class, 'BlogPostDetails']);
+
+Route::get('/blog/post/category/{category_id}',[HomeBlogController::class, 'BlogPostCategory']);
