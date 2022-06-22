@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ShippingAreaController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
@@ -317,12 +318,23 @@ Route::prefix('blog')->group(function(){
  Route::post('/post/update',[BlogController::class,'BlogPostUpdate'])->name('post.update');
 
  Route::get('/post/delete/{id}',[BlogController::class,'BlogPostDelete'])->name('post.delete');
-// site setting route All
+});
 
+///=========Site setting route All===============================>
+Route::prefix('setting')->group(function(){
 
+//Setting site
+Route::get('/site/add/edit',[SiteSettingController::class, 'SiteSetting'])->name('site.add-edit');
 
+Route::post('/site/update',[SiteSettingController::class, 'SiteSettingUpdate'])->name('site.update');
+//Setting seo
+Route::get('/seo/add/edit',[SiteSettingController::class, 'SeoSetting'])->name('seo.add-edit');
+
+Route::post('/seo/update',[SiteSettingController::class, 'SeoSettingUpdate'])->name('seo.update');
 
 });
+
+
 
 Route::middleware(['auth:sanctum,web', config('jetstream.auth_session'),'verified'
 ])->group(function () {

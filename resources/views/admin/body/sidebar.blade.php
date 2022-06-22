@@ -174,6 +174,23 @@
             </ul>
           </li>
 
+          <li class="treeview {{ ($prefix == '/setting') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="server"></i>
+              <span>Paramètre</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'site.add-edit') ? 'active' : '' }}">
+              <a href="{{ route('site.add-edit') }}"><i class="ti-more"></i>Site</a></li>
+
+              <li class="{{ ($route == 'seo.add-edit') ? 'active' : '' }}">
+                <a href="{{ route('seo.add-edit') }}"><i class="ti-more"></i>Seo</a></li>
+            </ul>
+          </li>
+
           <li class="treeview {{ ($prefix == '/blog') ? 'active' : '' }}">
             <a href="#">
               <i data-feather="server"></i>

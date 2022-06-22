@@ -1,12 +1,17 @@
+@php
+    $seo = App\Models\SeoSetting::find(1);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Meta -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="description" content="">
+<meta name="title" content="{{ $seo->meta_title }}">
+<meta name="author" content="{{ $seo->meta_author }}">
+<meta name="description" content="{{ $seo->meta_description }}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="keywords" content="MediaCenter, Template, eCommerce">
+<meta name="keywords" content="{{ $seo->meta_keyword }}">
 <meta name="robots" content="all">
 <title>@yield('title')</title>
 
@@ -30,8 +35,13 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://js.stripe.com/v3/"></script>
-
 </head>
+<!--//google analytics code -->
+<script>
+    {{ $seo->google_analytics }}
+</script>
+<!--//google analytics code -->
+
 <body class="cnt-home">
 <!-- ============================================== HEADER ============================================== -->
 @include('frontend.body.header')
