@@ -66,12 +66,17 @@ commande return
 
                 <td class="col-md-3">
                     <label for="">
-                    <span class="badge badge-pill badge-warning" style="background:#418DB9">{{ $item->status }}
+                    @if($item->order_return == 1)
+                    <span class="badge badge-pill badge-warning" style="background:#800080">En attendant
                     </span>
 
                     <span class="badge badge-pill badge-warning" style="background:red">
                         Return Demandé
                     </span>
+                    @elseif ($item->order_return == 2)
+                    <span class="badge badge-pill badge-warning" style="background:#008000">Success
+                    </span>
+                    @endif
                     </label>
                 </td>
 

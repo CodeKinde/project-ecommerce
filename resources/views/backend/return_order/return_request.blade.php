@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 @section('admin')
 @section('title')
- ecommerce coupon page
+ return request
 @endsection
 <div class="container-full">
     <!-- Main content -->
@@ -13,7 +13,7 @@
 
          <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title"> Liste des commandes en attente
+              <h3 class="box-title"> Liste des commandes de retour demandé
                   <span class="badge badge-danger badge-pill">{{ count($orders) }}</span>
               </h3>
 
@@ -37,14 +37,17 @@
                      <tr>
                         <td>{{ $item->order_date }}</td>
                         <td>{{ $item->invoice_no }}</td>
-                        <td>${{ $item->amount }}</td>
+                        <td>{{ $item->amount }}</td>
                         <td>{{ $item->payment_method }}</td>
                         <td>
-                     <span class="badge badge-pill badge-success">{{ $item->status }}</span>
+                         @if($item->order_return == 1)
+                         <span class="badge badge-pill badge-primary">En attente</span>
+                         @endif
                       </td>
 
-                        <td width="15%">
-    <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-primary" title="voir"><i class="fa fa-eye"></i></a>
+                        <td width="10%">
+ <a href="{{ route('return.approve',$item->id) }}" class="btn btn-danger" title="approve">Approve</a>
+
                         </td>
                     </tr>
                      @endforeach

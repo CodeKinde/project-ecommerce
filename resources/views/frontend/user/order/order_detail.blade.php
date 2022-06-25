@@ -189,7 +189,7 @@ commande details
             </div>
            </div> <!--// end col md-8 -->
        </div>
-        @if($order->status !== "Livré")
+        @if($order->status !== "delivered")
         @else
         @php
          $order = App\Models\Order::where('id',$order->id)->where('return_reason','=',null)->first();

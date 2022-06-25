@@ -41,6 +41,7 @@ class AllUserController extends Controller
         Order::findOrFail($order_id)->update([
             'return_date' => Carbon::now()->format('d F Y'),
             'return_reason' => $request->return_reason,
+            'order_return' => 1,
         ]);
         $notification = array(
             'message' => ' Demande de return envoyé avec succès!',

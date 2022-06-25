@@ -42,7 +42,7 @@ class CashController extends Controller
             'order_month' => Carbon::now()->format('F'),
             'order_year' => Carbon::now()->format('Y'),
             'created_at' => Carbon::now(),
-            'status' => 'Pending',
+            'status' => 'pending',
 
         ]);
         $invoice = Order::findOrFail($order_id);

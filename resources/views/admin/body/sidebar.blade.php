@@ -191,6 +191,42 @@
             </ul>
           </li>
 
+          <li class="treeview {{ ($prefix == '/return') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="server"></i>
+              <span>Commande Return</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'return.request') ? 'active' : '' }}">
+              <a href="{{ route('return.request') }}"><i class="ti-more"></i>Demande de Return</a></li>
+
+              <li class="{{ ($route == 'all.request') ? 'active' : '' }}">
+                <a href="{{ route('all.request') }}"><i class="ti-more"></i>Toutes Demandes</a></li>
+            </ul>
+          </li>
+
+          <li class="treeview {{ ($prefix == '/review') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="server"></i>
+              <span>Avis des Clients</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ ($route == 'review.view') ? 'active' : '' }}">
+              <a href="{{ route('review.view') }}"><i class="ti-more"></i>Avis En attente</a></li>
+
+              <li class="{{ ($route == 'publish.review') ? 'active' : '' }}">
+                <a href="{{ route('publish.review') }}"><i class="ti-more"></i>Avis Publier</a></li>
+            </ul>
+          </li>
+
+
+
           <li class="treeview {{ ($prefix == '/blog') ? 'active' : '' }}">
             <a href="#">
               <i data-feather="server"></i>

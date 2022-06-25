@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SliderController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\User\StripeController;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Facades\Route;
@@ -265,7 +267,7 @@ Route::prefix('order')->group(function(){
 
      Route::get('/cancel/orders','CancelOrders')->name('cancel.order');
 
-     Route::get('/pending/confirm/{order_id}','PendingToConfirm')->name('pending-confirm');
+     Route::get('/pending/confirm/{order_id}','PendingToConfirm')->name('pending.confirm');
 
      Route::get('/confirm/processing/{order_id}','ConfirmToProcessing')->name('confirm-processing');
 
@@ -331,6 +333,32 @@ Route::post('/site/update',[SiteSettingController::class, 'SiteSettingUpdate'])-
 Route::get('/seo/add/edit',[SiteSettingController::class, 'SeoSetting'])->name('seo.add-edit');
 
 Route::post('/seo/update',[SiteSettingController::class, 'SeoSettingUpdate'])->name('seo.update');
+
+});
+
+///=========Return Order route All===============================>
+Route::prefix('return')->group(function(){
+
+Route::get('/admin/request',[ReturnController::class, 'ReturnRequest'])->name('return.request');
+Route::get('/admin/approve/{order_id}',[ReturnController::class, 'ReturnRequestApprove'])->name('return.approve');
+    //Setting seo
+Route::get('/admin/allrequest',[ReturnController::class, 'ReturnRequestAll'])->name('all.request');
+
+    });
+
+///=========frontend review product Route All===============================>
+Route::post('review/store',[ReviewController::class, 'ReviewStore'])->name('review.store');
+///=========Admin review product Route All===============================>
+Route::prefix('review')->group(function(){
+
+Route::get('/view',[ReviewController::class, 'ReviewView'])->name('review.view');
+
+Route::get('admin/publish/{id}',[ReviewController::class, 'ReviewPublish'])->name('review.publish');
+
+Route::get('/publish',[ReviewController::class, 'PublishReview'])->name('publish.review');
+
+Route::get('/publish/delete/{id}',[ReviewController::class, 'PublishDelete'])->name('review.delete');
+
 
 });
 

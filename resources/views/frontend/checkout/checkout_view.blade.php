@@ -38,22 +38,22 @@
 
             <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Shipping Name <span>*</span></label>
-            <input type="text" class="form-control unicase-form-control text-input" id="shipping_name" name="shipping_name" placeholder="Prénom & Nom" value="{{ Auth::user()->name }}">
+            <input type="text" class="form-control unicase-form-control text-input" id="shipping_name" name="shipping_name" placeholder="Prénom & Nom" value="{{ Auth::user()->name }}" required>
             </div>
 
             <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-            <input type="text" class="form-control unicase-form-control text-input" id=" shipping_email" name="shipping_email" placeholder="Email" value="{{ Auth::user()->email }}">
+            <input type="text" class="form-control unicase-form-control text-input" id=" shipping_email" name="shipping_email" placeholder="Email" value="{{ Auth::user()->email }}" required>
             </div>
 
             <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Téléphone <span>*</span></label>
-            <input type="number" class="form-control unicase-form-control text-input" id="shipping_phone" name="shipping_phone" placeholder="Téléphone" value="{{ Auth::user()->mobile }}">
+            <input type="number" class="form-control unicase-form-control text-input" id="shipping_phone" name="shipping_phone" placeholder="Téléphone" value="{{ Auth::user()->mobile }}" required>
             </div>
 
             <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Post Code <span>*</span></label>
-            <input type="text" class="form-control unicase-form-control text-input" id="post_code" name="post_code" placeholder="post_code" value="">
+            <input type="text" class="form-control unicase-form-control text-input" id="post_code" name="post_code" placeholder="post_code" value="" required>
             </div>
     </div>
 				<!-- guest-login -->
@@ -63,7 +63,7 @@
 
                 <div class="form-group">
                 <label class="info-title" for="exampleInputPassword1">Division <span>*</span></label>
-                    <select name="division_id" id="division_id" class="form-control unicase-form-control text-input">
+                    <select name="division_id" id="division_id" class="form-control unicase-form-control text-input" required>
                     <option value="" disabled selected>Select Division</option>
                     @foreach ($divsions as $item)
                         <option value="{{ $item->id }}">{{ $item->division_name }}</option>
@@ -77,7 +77,7 @@
 
             <div class="form-group">
             <label class="info-title" for="exampleInputPassword1">District <span>*</span></label>
-                <select name="district_id" id="district_id" class="form-control unicase-form-control text-input">
+                <select name="district_id" id="district_id" class="form-control unicase-form-control text-input" required>
                 <option value="" disabled selected>Select District</option>
                 </select>
                 @error('district_id')
@@ -88,7 +88,7 @@
 
             <div class="form-group">
             <label class="info-title" for="exampleInputPassword1">State <span>*</span></label>
-                <select name="state_id" id="state_id" class="form-control unicase-form-control text-input">
+                <select name="state_id" id="state_id" class="form-control unicase-form-control text-input" required>
                 <option value="" disabled selected>Select State</option>
                 </select>
                 @error('state_id')

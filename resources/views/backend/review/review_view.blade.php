@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 @section('admin')
 @section('title')
- ecommerce coupon page
+ avis en attente
 @endsection
 <div class="container-full">
     <!-- Main content -->
@@ -13,9 +13,7 @@
 
          <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title"> Liste des commandes en attente
-                  <span class="badge badge-danger badge-pill">{{ count($orders) }}</span>
-              </h3>
+              <h3 class="box-title"> Liste Avis des Clients</h3>
 
             </div>
             <!-- /.box-header -->
@@ -24,27 +22,32 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Invoice N°</th>
-                            <th>Montant</th>
-                            <th>Paiement</th>
+                            <th>Summary</th>
+                            <th>Commentaire</th>
+                            <th>Client</th>
+                            <th>Produit</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                     @foreach ($orders as $item)
+                     @foreach ($reviews as $item)
                      <tr>
-                        <td>{{ $item->order_date }}</td>
-                        <td>{{ $item->invoice_no }}</td>
-                        <td>${{ $item->amount }}</td>
-                        <td>{{ $item->payment_method }}</td>
+                        <td>{{ $item->summary }}</td>
+                        <td>{{ $item->comment }}</td>
+                        <td>{{ $item->user->name }}</td>
+                        <td>{{ $item->product->product_name_fr }}</td>
                         <td>
-                     <span class="badge badge-pill badge-success">{{ $item->status }}</span>
+                         @if($item->status == 0)
+                         <span class="badge badge-pill badge-primary">En attente</span>
+                         @elseif($item->status == 1)
+                         <span class="badge badge-pill badge-success">Publish</span>
+                         @endif
                       </td>
 
-                        <td width="15%">
-    <a href="{{ route('pending.order.details',$item->id) }}" class="btn btn-primary" title="voir"><i class="fa fa-eye"></i></a>
+                        <td width="10%">
+ <a href="{{ route('review.publish',$item->id) }}" class="btn btn-danger" title="publier">Publier</a>
+
                         </td>
                     </tr>
                      @endforeach

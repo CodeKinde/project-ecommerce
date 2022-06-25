@@ -64,12 +64,34 @@ commande
                 </td>
 
 
-                <td class="col-md-3">
-                    <label for="">
-                    <span class="badge badge-pill badge-warning" style="background:#418DB9">{{ $item->status }}
+             <td class="col-md-3">
+                @if ($item->status == "pending" )
+                  <span class="badge badge-pill badge-warning" style="background:#800080">En attendant</span>
+                 @elseif ($item->status == "confirm")
+                 <span class="badge badge-pill badge-warning" style="background:#0000FF">Confirmé</span>
+
+                 @elseif ($item->status == "processing")
+                 <span class="badge badge-pill badge-warning" style="background:#FFA500">Traitement</span>
+
+                 @elseif ($item->status == "picked")
+                 <span class="badge badge-pill badge-warning" style="background:#808000">Choisie</span>
+
+                 @elseif ($item->status == "shipped")
+                 <span class="badge badge-pill badge-warning" style="background:#808080">Envoyé</span>
+
+                 @elseif ($item->status == "delivered")
+                 <span class="badge badge-pill badge-warning" style="background:#008000">Livré</span>
+
+                 @elseif ($item->order_return == 1)
+                 <span class="badge badge-pill badge-warning" style="background:red;">Return Demandé
+                </span>
+                 @else
+                 <span class="badge badge-pill badge-warning" style="background:#FF0000">Annulé</span>
+                 @endif
+
                     </span>
-                    </label>
-                </td>
+
+             </td>
 
 
             <td class="col-md-1">
